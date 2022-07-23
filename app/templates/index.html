@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Shipping tracking app</title>
+    <!-- Importing Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Importing Personal CSS -->
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="about-app">
+            <h1>E-Commerce Shipping web app that predicts whether a product reach on time or not</h1>
+        </div>
+        <div class="portal">
+            <div class="app-image">
+                <img src="{{url_for('static', filename='containers.jpg')}}" class="image">
+            </div>
+
+            <div class="app-form">
+                <h1 class="form-header">Product Shipment Tracking details:</h1>
+                <form action="/predict" method="POST">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">ID</span>
+                        <input name="form-id" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                    </div>
+                    <select class="form-select form-select-sm mb-3" name="form-warehouse-block" required aria-label=".form-select-sm example">
+                        <option value="">Warehouse block</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                    <select class="form-select form-select-sm mb-3" name="form-shipment-mode" aria-label=".form-select-sm example" required>
+                        <option value="">Mode of shipment</option>
+                        <option value="Flight">Flight</option>
+                        <option value="Ship">Ship</option>
+                        <option value="Road">Road</option>
+                    </select>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Customer care calls</span>
+                        <input type="number" class="form-control" name="form-customer-care-calls" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                    </div>
+                    <select class="form-select form-select-sm mb-3" name="form-customer-ratings" aria-label=".form-select-sm example" required>
+                        <option value="">Customer ratings</option>
+                        <option value="1">Worst</option>
+                        <option value="2">Bad</option>
+                        <option value="3">Neutral</option>
+                        <option value="4">Good</option>
+                        <option value="5">Best</option>
+                    </select>
+                    <div class="input-group input-group-sm  mb-3">
+                        <span class="input-group-text">Cost of product</span>
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" name="form_product_cost" aria-label="Dollar amount (with dot and two decimal places)" required>
+                    </div>
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Prior purchases</span>
+                        <input type="number" class="form-control" name="form-prior-purchases" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                    </div>
+                    <select class="form-select form-select-sm mb-3" name="form_product_importance" aria-label=".form-select-sm example" required>
+                        <option value="">Product importance</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <div class="form-check  form-check-inline">
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" name="form-gender" value="M" required>
+                        <label class="form-check-label" for="validationFormCheck2">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="validationFormCheck3" name="form-gender" value="F" required>
+                        <label class="form-check-label" for="validationFormCheck3">Female</label>
+                    </div>
+                    <div class="input-group input-group-sm  mb-3">
+                        <span class="input-group-text">Discount offered</span>
+                        <span class="input-group-text">%</span>
+                        <input type="number" class="form-control" name="form-discount-offered" aria-label="Discount(with percentage)" required>
+                    </div>
+                    <div class="input-group input-group-sm  mb-3">
+                        <span class="input-group-text">Weights</span>
+                        <span class="input-group-text">gms</span>
+                        <input type="number" class="form-control" name="form-weights-gms" aria-label="Weights(in grams)" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Predict</button>
+
+                    <div>
+                        <label for="disabledTextInput" class="form-label prediction-label">Reached on time prediction:</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="No prediction" disabled>
+                        {% if prediction == 1%}
+                        <script>
+                            document.getElementById('disabledTextInput').placeholder = 'Not on time'
+                        </script>
+                        {% elif prediction == 0%}
+                        <script>
+                            document.getElementById('disabledTextInput').placeholder = 'On time'
+                        </script>
+                        {% endif %}
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+     <!-- Importing Bootstrap JS Bundle with Popper -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

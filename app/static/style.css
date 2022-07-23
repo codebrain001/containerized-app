@@ -1,0 +1,47 @@
+:root {
+ --pd: 20px  /*  padding variable */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+body {
+    color: #131415;
+    font-family: spezia, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+  }
+
+.about-app h1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: var(--pd);
+}
+
+.portal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4em 0.75em;
+}
+
+.image {
+  width: 95%;
+  border-radius: 1%;
+  height: auto;
+}
+
+.form-header {
+  font-size: 15px;
+  font-weight: bold;
+  padding-bottom: var(--pd);
+}
+
+.prediction-label {
+  padding-top: var(--pd);
+  font-weight: bold;
+}
